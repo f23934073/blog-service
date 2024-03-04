@@ -33,7 +33,7 @@ JWT:
 Database:
   DBType: mysql
   UserName: root
-  Password:
+  Password: a13519567
   Host: 127.0.0.1:3306
   DBName: blog_service
   TablePrefix: blog_

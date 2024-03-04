@@ -1,0 +1,4 @@
+2024/03/03 20:10:58 {"callers":["/Users/stevehuang/Documents/sideProject/blog-service/server/main.go: 25 main.main"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1709467858173862000}
+2024/03/03 20:11:32 {"callers":["/Users/stevehuang/Documents/sideProject/blog-service/server/main.go: 25 main.main"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1709467892598432000}
+2024/03/03 20:13:24 {"callers":["/Users/stevehuang/Documents/sideProject/blog-service/server/main.go: 25 main.main"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1709467985218108000}
+2024/03/04 10:25:55 {"callers":["/Users/stevehuang/Documents/sideProject/blog-service/server/main.go: 28 main.main"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1709519155793774000}
