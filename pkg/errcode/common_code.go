@@ -21,6 +21,14 @@ var (
 	ErrorCountTagFail   = NewError(20010005, "統計標籤失敗")
 )
 
+var (
+	ErrorGetArticleFail    = NewError(20020001, "獲取文章失败")
+	ErrorGetArticlesFail   = NewError(20020002, "獲取多個文章失敗")
+	ErrorCreateArticleFail = NewError(20020003, "創建文章失敗")
+	ErrorUpdateArticleFail = NewError(20020004, "更新文章失敗")
+	ErrorDeleteArticleFail = NewError(20020005, "刪除文章失敗")
+)
+
 // 2003xxx 上傳文件相關錯誤
 var (
 	ErrorUploadFileFail = NewError(20030001, "上傳文件失敗")
