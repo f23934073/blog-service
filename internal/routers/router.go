@@ -1,6 +1,9 @@
 package routers
 
 import (
+	"net/http"
+
+	"blog-service/global"
 	"blog-service/internal/middleware"
 	v1 "blog-service/internal/routers/api/v1"
 	_ "blog-service/server/docs"
@@ -14,6 +17,13 @@ func NewRouters() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.Use(middleware.Translations())
+
+	upload := v1.NewUpload()
+
+	r.POST("/upload/file", upload.UploadFile)
+
+	// Static file server
+	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
 
 	//swagger
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
