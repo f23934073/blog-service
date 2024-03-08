@@ -12,4 +12,5 @@ var (
 	DatabaseSetting *setting.DatabaseSettings
 	DBEngine        *gorm.DB
 	Logger          *logger.Logger
+	JWTSetting      *setting.JWTSettings
 )
