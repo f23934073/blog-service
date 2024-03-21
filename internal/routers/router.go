@@ -37,6 +37,7 @@ func NewRouters() *gin.Engine {
 	apiv1.Use(middleware.JWT())
 	apiv1.Use(middleware.AccessLog())
 	apiv1.Use(middleware.Recovery())
+	apiv1.Use(middleware.AppInfo())
 	{
 		apiv1.POST("/tags", tag.Create)
 		apiv1.DELETE("/tags/:id", tag.Delete)
