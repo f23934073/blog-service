@@ -2,20 +2,38 @@ package routers
 
 import (
 	"net/http"
+	"time"
 
 	"blog-service/global"
 	"blog-service/internal/middleware"
 	v1 "blog-service/internal/routers/api/v1"
+	"blog-service/pkg/limiter"
 	_ "blog-service/server/docs"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+var methodLimiters = limiter.NewMethodLimiter().AddBuckets(
+	limiter.LimiterBucketRule{
+		Key:          "/auth",
+		FillInterval: time.Second,
+		Capacity:     10,
+		Quantum:      10,
+	})
+
 func NewRouters() *gin.Engine {
 	r := gin.New()
-	r.Use(gin.Logger())
-	r.Use(gin.Recovery())
+	if global.ServerSetting.RunMode == "debug" {
+		r.Use(gin.Logger())
+		r.Use(gin.Recovery())
+	} else {
+		r.Use(middleware.AccessLog())
+		r.Use(middleware.Recovery())
+	}
+
+	r.Use(middleware.RateLimiter(methodLimiters))
+	r.Use(middleware.ContextTimeout(60 * time.Second))
 	r.Use(middleware.Translations())
 
 	upload := v1.NewUpload()
@@ -35,8 +53,6 @@ func NewRouters() *gin.Engine {
 
 	apiv1 := r.Group("api/v1")
 	apiv1.Use(middleware.JWT())
-	apiv1.Use(middleware.AccessLog())
-	apiv1.Use(middleware.Recovery())
 	apiv1.Use(middleware.AppInfo())
 	{
 		apiv1.POST("/tags", tag.Create)
