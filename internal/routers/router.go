@@ -28,6 +28,8 @@ func NewRouters() *gin.Engine {
 	//swagger
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	r.POST("/auth", v1.GetAuth)
+
 	article := v1.NewArticle()
 	tag := v1.NewTag()
 

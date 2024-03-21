@@ -52,30 +52,31 @@ type Article struct {
 }
 
 func (svc *Service) GetArticle(param *ArticleRequest) (*Article, error) {
-	article, err := svc.dao.GetArticle(param.ID, param.State)
-	if err != nil {
-		return nil, err
-	}
+	//article, err := svc.dao.GetArticle(param.ID, param.State)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//
+	//articleTag, err := svc.dao.GetArticleTagByAID(article.ID)
+	//if err != nil {
+	//	return nil, err
+	//}
 
-	articleTag, err := svc.dao.GetArticleTagByAID(article.ID)
-	if err != nil {
-		return nil, err
-	}
-
-	tag, err := svc.dao.GetTag(articleTag.TagID, model.STATE_OPEN)
-	if err != nil {
-		return nil, err
-	}
-
-	return &Article{
-		ID:            article.ID,
-		Title:         article.Title,
-		Desc:          article.Desc,
-		Content:       article.Content,
-		CoverImageUrl: article.CoverImageUrl,
-		State:         article.State,
-		Tag:           &tag,
-	}, nil
+	//tag, err := svc.dao.GetTag(articleTag.TagID, model.STATE_OPEN)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//
+	//return &Article{
+	//	ID:            article.ID,
+	//	Title:         article.Title,
+	//	Desc:          article.Desc,
+	//	Content:       article.Content,
+	//	CoverImageUrl: article.CoverImageUrl,
+	//	State:         article.State,
+	//	Tag:           &tag,
+	//}, nil
+	return nil, nil
 }
 
 func (svc *Service) GetArticleList(param *ArticleListRequest, pager *app.Pager) ([]*Article, int, error) {
