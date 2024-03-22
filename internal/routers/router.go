@@ -35,6 +35,7 @@ func NewRouters() *gin.Engine {
 	r.Use(middleware.RateLimiter(methodLimiters))
 	r.Use(middleware.ContextTimeout(60 * time.Second))
 	r.Use(middleware.Translations())
+	r.Use(middleware.Tracing())
 
 	upload := v1.NewUpload()
 
@@ -69,4 +70,5 @@ func NewRouters() *gin.Engine {
 		apiv1.GET("/articles/:id", article.Get)
 	}
 	return r
+
 }

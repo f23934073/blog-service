@@ -10,6 +10,7 @@ import (
 	"blog-service/internal/routers"
 	"blog-service/pkg/logger"
 	"blog-service/pkg/setting"
+	"blog-service/pkg/tracer"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
@@ -26,6 +27,9 @@ func main() {
 		panic(err)
 	}
 	if err := setupLogger(); err != nil {
+		panic(err)
+	}
+	if err := setupTracer(); err != nil {
 		panic(err)
 	}
 
@@ -93,5 +97,16 @@ func setupLogger() error {
 		MaxAge:    10,
 		LocalTime: true,
 	}, "", log.LstdFlags).WithCaller(2)
+	return nil
+}
+
+func setupTracer() error {
+	jaegerTracer, _, err := tracer.NewJaegerTracer(
+		"blog-service",
+		"127.0.0.1:6831")
+	if err != nil {
+		return err
+	}
+	global.Tracer = jaegerTracer
 	return nil
 }
